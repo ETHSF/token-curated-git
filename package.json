@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "probot run ./index.js"
   },
   "bin": {
     "tcginit": "cp tcg-config.js .tcg-config.js; git update-index --assume-unchanged .tcgconfig",
@@ -16,6 +16,11 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "probot": "^7.2.0"
+  },
+  "devDependencies": {
+    "localtunnel": "^1.9.1",
+    "smee-client": "^1.0.2"
   }
 }

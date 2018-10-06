@@ -5,6 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+ethsf-curated-token.2018-10-06.private-key.pem
 # Runtime data
 pids
 *.pid
