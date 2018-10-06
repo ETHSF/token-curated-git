@@ -1,11 +1,13 @@
 // A plugin is a Node module that exports a function which takes a `robot` argument
 module.exports = robot => {
-  console.log("- hits robot");
-  // Listen for a pull request being opened or synchronized
-  robot.on('pull_request', async (event, context) => {
-    // Just assign a variable to make our life easier
-    const pr = event.payload.pull_request;
 
+ // robot.on('pull_request', async (event, context) => {
+    robot.on('pull_request.opened', async context => {
+
+    // Just assign a variable to make our life easier
+    const pr = context.payload.pull_request;
+    console.log(context);
+    console.log(pr);
     // Get all the commits in the pull request
     const compare = await context.github.repos.compareCommits(context.repo({
       base: pr.base.sha,
