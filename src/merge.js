@@ -1,8 +1,15 @@
-import initAragonJS from './aragonjs-wrapper'
+var {initAragonJS} =require('./helpers/aragonjs-wrapper')
 
+var fs = require("fs");
 
+var tcgConfig=fs.readFileSync("tcg-config.json", "utf8");
+tcgConfig = JSON.parse(tcgConfig);
 
-initAragonJS(___dao___, ___ens___, {
+commitHash = require('child_process')
+    .execSync('git rev-parse HEAD')
+    .toString().trim()
+
+initAragonJS(tcgConfig.dao, tcgConfig.ens, {
   accounts: web3.accounts,
   provider: web3.currentProvider,
   onApps: async apps => {
@@ -23,7 +30,7 @@ initAragonJS(___dao___, ___ens___, {
 
 const tryFindTransactionPath = async () => {
   if (appsLoaded && wrapper) {
-    ctx.transactionPath = await wrapper.getTransactionPath(___destination___,"approve",[___githash___,"0x00"])
+    ctx.transactionPath = await wrapper.getTransactionPath(tcgConfig.tokenCuratedGitAddress,"approve",[commitHash,"0x00"])
 
     let tx = ctx.transactionPath[0]
 
