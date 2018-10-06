@@ -15,7 +15,7 @@ module.exports = robot => {
     }));
 
     // Check that every commit has the word bananas in it
-    const isBananas = compare.commits.every(data => {
+    const isBananas = compare.data.commits.every(data => {
       return data.commit.message.match(/bananas/i);
     });
 
