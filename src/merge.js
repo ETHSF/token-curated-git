@@ -3,7 +3,7 @@ import initAragonJS from './aragonjs-wrapper'
 
 const tryFindTransactionPath = async () => {
   if (appsLoaded && wrapper) {
-    ctx.transactionPath = await getTransactionPath(wrapper)
+    ctx.transactionPath = await wrapper.getTransactionPath(***destination***,approve,[***githash***,"0x00"])
 
     let tx = ctx.transactionPath[0]
 
@@ -13,16 +13,7 @@ const tryFindTransactionPath = async () => {
 
     const estimatedGas = await web3.eth.estimateGas(ctx.transactionPath[0])
     tx.gas = parseInt(GAS_ESTIMATE_FUZZ_FACTOR * estimatedGas)
-    return new Promise((resolve, reject) => {
-      web3.eth.sendTransaction(ctx.transactionPath[0],(err,res) => {
-        if(err){
-          reject(err)
-          return
-        }
-        ctx.res = res
-        resolve()
-      })
-    })
+    await web3.eth.sendTransaction(ctx.transactionPath[0])
   }
 }
 
