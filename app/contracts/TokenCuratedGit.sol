@@ -7,7 +7,7 @@ contract TokenCuratedGit is AragonApp {
     using SafeMath for uint256;
 
     /// Events
-    event Approve(bytes32 indexed gitHash, bytes32 data);
+    event Approve(bytes32 indexed gitHash, bytes32 indexed data, address indexed sender);
 
     /// ACL
     bytes32 constant public APPROVER_ROLE = keccak256("APPROVER_ROLE");
@@ -22,6 +22,6 @@ contract TokenCuratedGit is AragonApp {
      * @param data Additional data, possibly a link
      */
     function approve(bytes32 gitHash, bytes32 data) auth(APPROVER_ROLE) external {
-        emit Approve(gitHash, data);
+        emit Approve(gitHash, data, msg.sender);
     }
 }

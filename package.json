@@ -5,6 +5,11 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+  "bin": {
+    "tcginit": "cp tcg-config.js .tcg-config.js; git update-index --assume-unchanged .tcgconfig",
+    "tcgmerge": "./dist/merge.js",
+    "tcgvalidate": "./dist/validate.js"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
