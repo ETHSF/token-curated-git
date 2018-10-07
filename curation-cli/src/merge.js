@@ -1,11 +1,12 @@
-var {initAragonJS} =require('./helpers/aragonjs-wrapper')
+import initAragonJS from './helpers/aragonjs-wrapper'
 
 var fs = require("fs");
+var web3 = require('web3');
 
 var tcgConfig=fs.readFileSync("tcg-config.json", "utf8");
 tcgConfig = JSON.parse(tcgConfig);
 
-commitHash = require('child_process')
+const commitHash = require('child_process')
     .execSync('git rev-parse HEAD')
     .toString().trim()
 
