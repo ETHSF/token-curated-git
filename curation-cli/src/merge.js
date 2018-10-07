@@ -33,19 +33,22 @@ initAragonJS(tcgConfig.dao, tcgConfig.ens, {
   ////process.exit(1)
 })
 
+function makeItThirtyTwo(str) {
+
+}
 
 const tryFindTransactionPath = async () => {
   if (appsLoaded && wrapper) {
-    ctx.transactionPath = await wrapper.getTransactionPath(tcgConfig.tokenCuratedGitAddress,"approve",[commitHash,"0x00"])
+   var transactionPath = await wrapper.getTransactionPath(tcgConfig.tokenCuratedGitAddress,"approve",["0x" + commitHash,"0x0000000000000000000000000000000000000000"])
 
-    let tx = ctx.transactionPath[0]
+    let tx = transactionPath[0]
 
     if (!tx) {
       throw new Error('Cannot find transaction path for executing action')
     }
 
-    const estimatedGas = await web3.eth.estimateGas(ctx.transactionPath[0])
+    const estimatedGas = await web3.eth.estimateGas(transactionPath[0])
     tx.gas = parseInt(GAS_ESTIMATE_FUZZ_FACTOR * estimatedGas)
-    await web3.eth.sendTransaction(ctx.transactionPath[0])
+    await web3.eth.sendTransaction(transactionPath[0])
   }
 }
